@@ -12,6 +12,7 @@ import (
 
 func displayResults(resultList []string) (){
 	for index, result := range resultList {
+		//result = strings.Split(result, ":")[1]
 		fmt.Printf("%d\t%s\n", index, string(result))
 	}
 }
@@ -19,6 +20,7 @@ func displayResults(resultList []string) (){
 func findExecutions(inputCommand string) (code int, commandStr string) {
 	command := "grep " + inputCommand + " " + getHistoryPath()
 	commandOut, _ := exec.Command("/bin/bash", "-c", command).Output()
+	//commandOut, _ := exec.Command("/bin/bash", "-c", "grep 'which ls' ", getHistoryPath()).Output()
 	commandStr = string(commandOut)
 	if commandStr == "" {
 		fmt.Printf("Not found in your history!\n")
@@ -50,6 +52,7 @@ func runChoice(choice string) () {
 }
 
 func main() {
+	//oldCmd := strings.Join(os.Args[1:], " ")
 	oldCmd := os.Args[1]
 	code, results := findExecutions(oldCmd)
 	if code == 0 {
