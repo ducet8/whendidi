@@ -61,8 +61,13 @@ func main() {
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
 		}
-		choiceNum, _ := strconv.Atoi(strings.TrimSuffix(choice, "\n"))
-		command := getCommand(choiceNum, resultList)
-		runChoice(command)
+		choice = strings.TrimSuffix(choice, "\n")
+		if choice == "Q" || choice == "q" {
+			os.Exit(0)
+		} else {
+			choiceNum, _ := strconv.Atoi(choice)
+			command := getCommand(choiceNum, resultList)
+			runChoice(command)
+		}
 	}
 }
